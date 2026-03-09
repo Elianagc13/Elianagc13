@@ -1,0 +1,506 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>RestoreSense — Pruebas de Recuperación Automáticas</title>
+  <meta name="description" content="Pruebas automáticas de recuperación sobre bóveda S3 (Wasabi) — verificaciones periódicas, evidencia para auditoría y reducción de riesgo." />
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Favicons / Meta -->
+  <meta name="theme-color" content="#0F172A" />
+  <style>
+    /* Progressive enhancement for backgrounds and overlay */
+    .hero-bg {
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+    }
+
+    /* Slight glass effect for cards */
+    .glass {
+      background: rgba(255,255,255,0.04);
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
+    }
+
+    /* Decorative diagonal divider */
+    .diagonal {
+      clip-path: polygon(0 0,100% 0,100% 80%,0 100%);
+    }
+  </style>
+</head>
+<body class="bg-slate-900 text-slate-100 antialiased leading-relaxed">
+
+  <!-- NAV -->
+  <nav class="max-w-7xl mx-auto px-6 py-5 flex items-center justify-between">
+    <div class="flex items-center gap-3">
+      <div class="h-10 w-10 rounded-md bg-gradient-to-br from-emerald-400 to-emerald-600 flex items-center justify-center text-slate-900 font-bold">RS</div>
+      <div>
+        <div class="text-lg font-semibold">RestoreSense</div>
+        <div class="text-xs text-slate-400">Automated Recovery Testing for S3 (Wasabi)</div>
+      </div>
+    </div>
+
+    <div class="hidden md:flex items-center gap-6">
+      <a href="#features" class="text-slate-300 hover:text-white">Features</a>
+      <a href="#how-it-works" class="text-slate-300 hover:text-white">How it works</a>
+      <a href="#pricing" class="text-slate-300 hover:text-white">Pricing</a>
+      <a href="#contact" class="text-emerald-300 hover:text-white font-semibold">Contact</a>
+    </div>
+
+    <div class="md:hidden">
+      <!-- simple mobile menu anchor -->
+      <button id="mobile-menu-toggle" class="p-2 rounded-md bg-slate-800/50 text-slate-200">Menu</button>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <header class="relative overflow-hidden">
+    <div class="hero-bg diagonal" style="
+      background-image:
+        linear-gradient(180deg, rgba(2,6,23,0.65), rgba(2,6,23,0.65)),
+        url('https://img.freepik.com/foto-gratis/mujer-desplazandose-computadora-portatil_28096252.htm');
+      min-height: 64vh;
+    ">
+      <div class="max-w-7xl mx-auto px-6 py-20 lg:py-28">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
+          <div class="space-y-6">
+            <h1 class="text-4xl sm:text-5xl font-extrabold leading-tight">
+              Trust your backups. Verify recoveries.
+            </h1>
+            <p class="text-slate-300 max-w-xl">
+              Automated Recovery Testing for S3 (Wasabi) — scheduled restore tests, verifiable audit evidence, and proactive alerts so you know your backups will work when you need them.
+            </p>
+
+            <div class="flex gap-4 items-center">
+              <a href="#contact" class="inline-flex items-center gap-3 px-5 py-3 rounded-md bg-emerald-500 text-slate-900 font-semibold shadow-lg hover:scale-[1.02] transition">
+                Request Demo
+              </a>
+              <a href="#how-it-works" class="text-slate-300 hover:text-white">How it works →</a>
+            </div>
+
+            <div class="mt-6 flex gap-4">
+              <div class="flex items-center gap-3">
+                <img src="local-image-1.jpg" alt="icon" class="h-12 w-12 object-cover rounded-md border border-slate-700/40" onerror="this.style.display='none'"/>
+                <div>
+                  <div class="text-sm font-medium">Built for Veeam & Wasabi</div>
+                  <div class="text-xs text-slate-400">Integration-ready & S3-compatible</div>
+                </div>
+              </div>
+
+              <div class="flex items-center gap-3">
+                <img src="local-image-2.jpg" alt="icon" class="h-12 w-12 object-cover rounded-md border border-slate-700/40" onerror="this.style.display='none'"/>
+                <div>
+                  <div class="text-sm font-medium">Compliance-ready reports</div>
+                  <div class="text-xs text-slate-400">Evidence for audits (ISO/GDPR/HIPAA)</div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- Right column: quick card + form CTA -->
+          <div>
+            <div class="glass p-6 rounded-xl border border-slate-700/40 shadow-md">
+              <div class="flex items-start gap-4">
+                <div class="flex-1">
+                  <h3 class="font-semibold text-lg">Start verifying recoveries in hours</h3>
+                  <p class="text-slate-300 text-sm mt-1">Schedule automatic restore tests, get PDF evidence and reduce RTO risk.</p>
+                </div>
+              </div>
+
+              <form id="hero-contact-form" class="mt-6 space-y-4">
+                <input type="text" id="name" name="name" placeholder="Your full name" class="w-full rounded-md px-4 py-3 bg-slate-800 border border-slate-700 text-slate-100" required />
+                <input type="email" id="email" name="email" placeholder="Email" class="w-full rounded-md px-4 py-3 bg-slate-800 border border-slate-700 text-slate-100" required value="eliana.gomez@sasnw.com" />
+                <select id="companySize" name="companySize" class="w-full rounded-md px-4 py-3 bg-slate-800 border border-slate-700 text-slate-100">
+                  <option value="">Company size</option>
+                  <option>1-50</option>
+                  <option>51-250</option>
+                  <option>251-1000</option>
+                  <option>1000+</option>
+                </select>
+
+                <div class="flex gap-3">
+                  <button type="submit" class="flex-1 inline-flex items-center justify-center gap-2 px-4 py-3 rounded-md bg-emerald-500 text-slate-900 font-semibold hover:scale-[1.01] transition">
+                    Request Demo
+                  </button>
+                  <button type="button" id="cta-try" class="px-4 py-3 rounded-md border border-slate-700 text-slate-200 hover:bg-slate-800">Contact Sales</button>
+                </div>
+
+                <p id="hero-form-msg" class="text-xs text-slate-400 mt-1"></p>
+              </form>
+
+            </div>
+
+            <div class="mt-4 text-xs text-slate-400">
+              <strong>Note:</strong> Replace the placeholder images (local-image-1.jpg, local-image-2.jpg) with your files if available.
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Secondary graphic (decorative background) -->
+    <div class="bg-slate-900">
+      <div class="max-w-7xl mx-auto px-6 py-10 grid grid-cols-1 sm:grid-cols-3 gap-6">
+        <div class="p-5 rounded-lg glass border border-slate-700/30">
+          <div class="text-3xl font-bold text-emerald-400">99.99%</div>
+          <div class="text-slate-300 text-sm">Data integrity checks</div>
+        </div>
+        <div class="p-5 rounded-lg glass border border-slate-700/30">
+          <div class="text-3xl font-bold text-emerald-400">Auto Reports</div>
+          <div class="text-slate-300 text-sm">Exportable evidence for audits</div>
+        </div>
+        <div class="p-5 rounded-lg glass border border-slate-700/30">
+          <div class="text-3xl font-bold text-emerald-400">RTO Monitoring</div>
+          <div class="text-slate-300 text-sm">Know real recovery times</div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- FEATURES -->
+  <section id="features" class="max-w-7xl mx-auto px-6 py-14">
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+      <div class="space-y-4">
+        <h2 class="text-2xl font-semibold">Why automated recovery tests?</h2>
+        <p class="text-slate-300">Backups are only as good as their restorability. RestoreSense performs scheduled verification tests, identifies issues early, and gives measurable evidence to operations and auditors.</p>
+
+        <ul class="mt-6 space-y-3">
+          <li class="flex items-start gap-3">
+            <div class="h-9 w-9 rounded-md bg-emerald-500/10 text-emerald-400 flex items-center justify-center font-bold">1</div>
+            <div>
+              <div class="font-medium">Automate restoration checks</div>
+              <div class="text-slate-400 text-sm">Periodic sandbox restores to validate integrity.</div>
+            </div>
+          </li>
+
+          <li class="flex items-start gap-3">
+            <div class="h-9 w-9 rounded-md bg-emerald-500/10 text-emerald-400 flex items-center justify-center font-bold">2</div>
+            <div>
+              <div class="font-medium">Compliance-ready evidence</div>
+              <div class="text-slate-400 text-sm">Exportable PDF reports and logs for audits.</div>
+            </div>
+          </li>
+
+          <li class="flex items-start gap-3">
+            <div class="h-9 w-9 rounded-md bg-emerald-500/10 text-emerald-400 flex items-center justify-center font-bold">3</div>
+            <div>
+              <div class="font-medium">Actionable alerts</div>
+              <div class="text-slate-400 text-sm">Detects ACLs, IAM, connectivity or speed problems.</div>
+            </div>
+          </li>
+        </ul>
+      </div>
+
+      <div class="lg:col-span-2">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div class="p-6 rounded-lg glass border border-slate-700/30">
+            <h3 class="font-semibold">Health Dashboard</h3>
+            <p class="text-slate-300 text-sm mt-2">Centralized view of backup health, test history and recovery metrics.</p>
+            <img src="https://img.freepik.com/free-vector/computacion-nube-digital-fondo-futurista-servicio-cibernetico_385419184.jpg" alt="dashboard" class="mt-4 rounded-md object-cover w-full h-44" onerror="this.src='local-image-3.jpg';" />
+          </div>
+
+          <div class="p-6 rounded-lg glass border border-slate-700/30">
+            <h3 class="font-semibold">Smart Recommendations</h3>
+            <p class="text-slate-300 text-sm mt-2">AI suggests retention policies and fixes for common restore issues (ACLs, permissions).</p>
+            <img src="local-image-4.jpg" alt="recommendations" class="mt-4 rounded-md object-cover w-full h-44" onerror="this.style.display='none'" />
+          </div>
+
+          <div class="p-6 rounded-lg glass border border-slate-700/30">
+            <h3 class="font-semibold">RTO Analytics</h3>
+            <p class="text-slate-300 text-sm mt-2">Measure and report actual recovery times by backup set.</p>
+          </div>
+
+          <div class="p-6 rounded-lg glass border border-slate-700/30">
+            <h3 class="font-semibold">Integrations</h3>
+            <p class="text-slate-300 text-sm mt-2">Veeam, Restic, rclone, and S3-compatible tools. Templates and scripts included.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- HOW IT WORKS -->
+  <section id="how-it-works" class="bg-slate-800/40 py-14">
+    <div class="max-w-6xl mx-auto px-6">
+      <h2 class="text-2xl font-semibold text-center">How it works — MVP flow</h2>
+      <div class="mt-8 grid grid-cols-1 md:grid-cols-4 gap-6">
+        <div class="p-6 rounded-lg glass text-center border border-slate-700/30">
+          <div class="text-emerald-400 font-bold text-lg">1</div>
+          <div class="mt-3 font-semibold">Select backups</div>
+          <div class="text-slate-300 text-sm mt-2">Choose critical buckets and backup sets to validate.</div>
+        </div>
+        <div class="p-6 rounded-lg glass text-center border border-slate-700/30">
+          <div class="text-emerald-400 font-bold text-lg">2</div>
+          <div class="mt-3 font-semibold">Schedule tests</div>
+          <div class="text-slate-300 text-sm mt-2">Define frequency: weekly, monthly, quarterly.</div>
+        </div>
+        <div class="p-6 rounded-lg glass text-center border border-slate-700/30">
+          <div class="text-emerald-400 font-bold text-lg">3</div>
+          <div class="mt-3 font-semibold">Run sandbox restores</div>
+          <div class="text-slate-300 text-sm mt-2">Perform isolated restores to validate integrity and RTO.</div>
+        </div>
+        <div class="p-6 rounded-lg glass text-center border border-slate-700/30">
+          <div class="text-emerald-400 font-bold text-lg">4</div>
+          <div class="mt-3 font-semibold">Report & act</div>
+          <div class="text-slate-300 text-sm mt-2">Auto reports, alerts and recommended fixes for issues found.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PRICING -->
+  <section id="pricing" class="max-w-6xl mx-auto px-6 py-14">
+    <h2 class="text-2xl font-semibold text-center">Plans</h2>
+    <p class="text-center text-slate-400 max-w-2xl mx-auto mt-2">Simple pricing aligned to company size and test frequency. Transparent. No hidden fees.</p>
+
+    <div class="mt-8 grid grid-cols-1 md:grid-cols-3 gap-6">
+      <div class="p-6 rounded-lg border border-slate-700/30 glass">
+        <div class="text-lg font-semibold">Impulso</div>
+        <div class="text-slate-300 text-sm">Best for small teams</div>
+        <div class="mt-4 text-3xl font-bold">€199/mo</div>
+        <ul class="mt-4 text-slate-300 text-sm space-y-2">
+          <li>Up to 5 backup sets</li>
+          <li>Monthly tests</li>
+          <li>PDF reports</li>
+        </ul>
+        <button class="mt-6 w-full py-3 rounded-md bg-emerald-500 text-slate-900 font-semibold">Get started</button>
+      </div>
+
+      <div class="p-6 rounded-lg border border-emerald-500/30 glass shadow-lg">
+        <div class="text-lg font-semibold">Ascenso</div>
+        <div class="text-slate-300 text-sm">Teams that need regular validation</div>
+        <div class="mt-4 text-3xl font-bold">€499/mo</div>
+        <ul class="mt-4 text-slate-300 text-sm space-y-2">
+          <li>Up to 25 backup sets</li>
+          <li>Weekly tests</li>
+          <li>RTO analytics</li>
+        </ul>
+        <button class="mt-6 w-full py-3 rounded-md bg-emerald-500 text-slate-900 font-semibold">Book a demo</button>
+      </div>
+
+      <div class="p-6 rounded-lg border border-slate-700/30 glass">
+        <div class="text-lg font-semibold">Trascender</div>
+        <div class="text-slate-300 text-sm">Custom SLAs & integrations</div>
+        <div class="mt-4 text-3xl font-bold">Contact us</div>
+        <ul class="mt-4 text-slate-300 text-sm space-y-2">
+          <li>Unlimited backup sets</li>
+          <li>Dedicated support</li>
+          <li>Compliance exports</li>
+        </ul>
+        <button class="mt-6 w-full py-3 rounded-md border border-slate-700 text-slate-200">Contact Sales</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- TESTIMONIALS -->
+  <section class="bg-slate-800/30 py-12">
+    <div class="max-w-5xl mx-auto px-6">
+      <h3 class="text-xl font-semibold text-center">Trusted by teams</h3>
+      <div class="mt-8 grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div class="p-6 glass rounded-lg border border-slate-700/30">
+          <p class="text-slate-300">“RestoreSense saved us from a potentially catastrophic restore failure — the automated test caught a permissions issue before an outage.”</p>
+          <div class="mt-4 text-sm font-medium text-emerald-300">— Carlos, Sysadmin</div>
+        </div>
+        <div class="p-6 glass rounded-lg border border-slate-700/30">
+          <p class="text-slate-300">“The audit reports easily demonstrated our compliance team that backups are recoverable.”</p>
+          <div class="mt-4 text-sm font-medium text-emerald-300">— Laura, Security Officer</div>
+        </div>
+        <div class="p-6 glass rounded-lg border border-slate-700/30">
+          <p class="text-slate-300">“We reduced our financial risk estimations by quantifying real RTO metrics.”</p>
+          <div class="mt-4 text-sm font-medium text-emerald-300">— Julián, Finance</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT / FORM SECTION -->
+  <section id="contact" class="max-w-5xl mx-auto px-6 py-14">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+      <div class="space-y-4">
+        <h3 class="text-2xl font-semibold">Get in touch</h3>
+        <p class="text-slate-300">Schedule a demo or ask for a technical walkthrough. We typically respond within one business day.</p>
+
+        <div class="mt-4 space-y-2">
+          <div class="flex items-center gap-3 text-slate-300">
+            <svg class="w-5 h-5 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 12H8m0 0l4 4m-4-4l4-4" />
+            </svg>
+            <div>
+              <div class="text-xs text-slate-400">Email</div>
+              <div class="text-sm font-medium">eliana.gomez@sasnw.com</div>
+            </div>
+          </div>
+
+          <div class="flex items-center gap-3 text-slate-300">
+            <svg class="w-5 h-5 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3" />
+            </svg>
+            <div>
+              <div class="text-xs text-slate-400">Response time</div>
+              <div class="text-sm font-medium">1 business day</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <div class="p-6 rounded-lg glass border border-slate-700/30">
+          <form id="main-contact-form" class="space-y-4">
+            <label class="block text-xs text-slate-400">Full name</label>
+            <input type="text" id="fullname" name="fullname" required class="w-full rounded-md px-4 py-3 bg-slate-800 border border-slate-700 text-slate-100" />
+
+            <label class="block text-xs text-slate-400">Work email</label>
+            <input type="email" id="workemail" name="workemail" required class="w-full rounded-md px-4 py-3 bg-slate-800 border border-slate-700 text-slate-100" />
+
+            <label class="block text-xs text-slate-400">Company</label>
+            <input type="text" id="company" name="company" class="w-full rounded-md px-4 py-3 bg-slate-800 border border-slate-700 text-slate-100" />
+
+            <label class="block text-xs text-slate-400">Message / How can we help?</label>
+            <textarea id="message" name="message" rows="4" class="w-full rounded-md px-4 py-3 bg-slate-800 border border-slate-700 text-slate-100"></textarea>
+
+            <div class="flex items-center gap-3">
+              <button type="submit" class="flex-1 py-3 rounded-md bg-emerald-500 text-slate-900 font-semibold">Send message</button>
+              <button type="button" id="download-spec" class="px-4 py-3 rounded-md border border-slate-700 text-slate-200">Download spec</button>
+            </div>
+
+            <p id="form-msg" class="text-xs text-slate-400 mt-1"></p>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="bg-slate-900/60 py-8 mt-10 border-t border-slate-800">
+    <div class="max-w-7xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-4">
+      <div class="text-sm text-slate-400">© <span id="year"></span> RestoreSense — Built by SAS (Storage Availability Solutions)</div>
+      <div class="text-sm text-slate-400">Privacy • Terms • Security</div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script>
+    // Replace this endpoint with your real form endpoint (serverless function, API, etc.)
+    // e.g. const FORM_ENDPOINT = "https://api.sasnw.com/forms/recoverysense";
+    const FORM_ENDPOINT = "https://example.com/submit"; // <-- REPLACE with your real endpoint
+
+    // Populate footer year
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Mobile menu (basic)
+    const mobileToggle = document.getElementById('mobile-menu-toggle');
+    if (mobileToggle) {
+      mobileToggle.addEventListener('click', ()=>{
+        alert('Mobile menu: use the anchors to navigate — this is a simplified demo.');
+      });
+    }
+
+    // Simple helper to show messages
+    function showMsg(el, text, success=true) {
+      el.textContent = text;
+      el.className = success ? 'text-xs text-emerald-300 mt-1' : 'text-xs text-rose-400 mt-1';
+    }
+
+    // FORM: hero small form
+    document.getElementById('hero-contact-form').addEventListener('submit', async function(e) {
+      e.preventDefault();
+      const name = document.getElementById('name').value.trim();
+      const email = document.getElementById('email').value.trim();
+      const companySize = document.getElementById('companySize').value || '';
+
+      const msgEl = document.getElementById('hero-form-msg');
+      showMsg(msgEl, 'Sending...', true);
+
+      try {
+        // Basic validation
+        if (!name || !email) { throw new Error('Please fill required fields'); }
+
+        // POST request (JSON). Adjust headers/payload to your API contract.
+        const res = await fetch(FORM_ENDPOINT, {
+          method: 'POST',
+          headers: {'Content-Type':'application/json'},
+          body: JSON.stringify({name, email, companySize, source: 'hero-form', product: 'RestoreSense'})
+        });
+
+        if (!res.ok) throw new Error('Server returned error: ' + res.status);
+        showMsg(msgEl, 'Thanks! We will contact you soon.', true);
+        this.reset();
+      } catch (err) {
+        showMsg(msgEl, 'Error sending form: ' + err.message, false);
+        console.error(err);
+      }
+    });
+
+    // FORM: main contact form
+    document.getElementById('main-contact-form').addEventListener('submit', async function(e) {
+      e.preventDefault();
+      const fullname = document.getElementById('fullname').value.trim();
+      const email = document.getElementById('workemail').value.trim();
+      const company = document.getElementById('company').value.trim();
+      const message = document.getElementById('message').value.trim();
+
+      const msgEl = document.getElementById('form-msg');
+      showMsg(msgEl, 'Sending...', true);
+
+      try {
+        if (!fullname || !email) throw new Error('Please fill required fields');
+
+        const res = await fetch(FORM_ENDPOINT, {
+          method: 'POST',
+          headers: {'Content-Type':'application/json'},
+          body: JSON.stringify({fullname, email, company, message, source: 'main-form', product: 'RestoreSense'})
+        });
+
+        if (!res.ok) throw new Error('Server responded with ' + res.status);
+        showMsg(msgEl, 'Message sent! We will contact you within one business day.', true);
+        this.reset();
+      } catch (err) {
+        showMsg(msgEl, 'Error sending form: ' + err.message, false);
+        console.error(err);
+      }
+    });
+
+    // CTA try button example: open contact
+    document.getElementById('cta-try').addEventListener('click', ()=> {
+      window.location.href = '#contact';
+    });
+
+    // Download spec button (example payload: creates a downloadable brief)
+    document.getElementById('download-spec').addEventListener('click', ()=> {
+      const spec = {
+        title: "RestoreSense - Technical Spec (MVP)",
+        bullets: [
+          "Automated restore tests (sandbox)",
+          "Integration: Veeam + Wasabi S3",
+          "Exportable PDF reports for audits",
+          "RTO analytics + health dashboard"
+        ]
+      };
+      const blob = new Blob([JSON.stringify(spec, null, 2)], {type: 'application/json'});
+      const a = document.createElement('a');
+      a.href = URL.createObjectURL(blob);
+      a.download = 'restoresense-spec.json';
+      a.click();
+      URL.revokeObjectURL(a.href);
+    });
+
+    // Small UX: lazy-load big external image URLs to avoid broken link issues.
+    (function lazyLoadExternal() {
+      const imgs = document.querySelectorAll('img');
+      imgs.forEach(img => {
+        img.loading = 'lazy';
+      });
+    })();
+
+  </script>
+
+  <!-- Accessibility / small note -->
+  <noscript>
+    <div class="fixed bottom-4 left-4 bg-rose-500 text-white px-4 py-2 rounded-md">JavaScript is required for the contact form to work. Please enable JavaScript.</div>
+  </noscript>
+
+</body>
+</html>
